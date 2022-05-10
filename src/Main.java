@@ -50,18 +50,13 @@ public class Main {
 
     static int arabicCalc(int firstOperand,int lastOperand, char operator) {
 
-        switch (operator) {
-            case '+' :
-                return firstOperand + lastOperand;
-            case '-' :
-                return firstOperand - lastOperand;
-            case '*' :
-                return firstOperand * lastOperand;
-            case '/' :
-                return firstOperand / lastOperand;
-            default:
-                return -1;
-        }
+        return switch (operator) {
+            case '+' -> firstOperand + lastOperand;
+            case '-' -> firstOperand - lastOperand;
+            case '*' -> firstOperand * lastOperand;
+            case '/' -> firstOperand / lastOperand;
+            default -> -1;
+        };
     }
 
     static String romanCalc(String firstOperand, String lastOperand, char operator) {
