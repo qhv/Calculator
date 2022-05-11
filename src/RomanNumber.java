@@ -9,7 +9,7 @@ class RomanNumber {
         if (!isCorrectRomanNumber(s)) {
             throw new Exception();
         }
-        number = romanToInt(s);
+        number = convertToInt(s);
         romanNumber = s;
     }
 
@@ -28,29 +28,7 @@ class RomanNumber {
         return Pattern.matches(regex, s);
     }
 
-    static int romanToInt(String romanNumber) {
-        int result = 0;
-        char[] digits = romanNumber.toCharArray();
-
-        for (int i = 0; i < digits.length; i++) {
-            boolean isNextDigit = i + 1 < digits.length;
-
-            result += switch (digits[i]) {
-                case 'I' -> (isNextDigit && (digits[i + 1] == 'V' || digits[i + 1] == 'X')) ? -1 : 1;
-                case 'V' -> 5;
-                case 'X' -> (isNextDigit && (digits[i + 1] == 'L' || digits[i + 1] == 'C')) ? -10 : 10;
-                case 'L' -> 50;
-                case 'C' -> (isNextDigit && (digits[i + 1] == 'D' || digits[i + 1] == 'M')) ? -100 : 100;
-                case 'D' -> 500;
-                case 'M' -> 1000;
-                default -> 0;
-            };
-        }
-
-        return result;
-    }
-
-    static String intToRoman(int number) throws Exception {
+    static RomanNumber intToRoman(int number) throws Exception {
         if  (number > 3999 || number < 1) {
             throw new Exception();
         }
@@ -74,10 +52,48 @@ class RomanNumber {
             };
         }
 
+        return new RomanNumber(result);
+    }
+
+    private int convertToInt(String romanNumber) {
+        int result = 0;
+        char[] digits = romanNumber.toCharArray();
+
+        for (int i = 0; i < digits.length; i++) {
+            boolean isNextDigit = i + 1 < digits.length;
+
+            result += switch (digits[i]) {
+                case 'I' -> (isNextDigit && (digits[i + 1] == 'V' || digits[i + 1] == 'X')) ? -1 : 1;
+                case 'V' -> 5;
+                case 'X' -> (isNextDigit && (digits[i + 1] == 'L' || digits[i + 1] == 'C')) ? -10 : 10;
+                case 'L' -> 50;
+                case 'C' -> (isNextDigit && (digits[i + 1] == 'D' || digits[i + 1] == 'M')) ? -100 : 100;
+                case 'D' -> 500;
+                case 'M' -> 1000;
+                default -> 0;
+            };
+        }
+
         return result;
     }
 
     public String toString() {
         return romanNumber;
+    }
+
+    public RomanNumber add(RomanNumber anotherRomanNumber) throws Exception {
+        return intToRoman(number + anotherRomanNumber.number);
+    }
+
+    public RomanNumber sub(RomanNumber anotherRomanNumber) throws Exception {
+        return intToRoman(number - anotherRomanNumber.number);
+    }
+
+    public RomanNumber mul(RomanNumber anotherRomanNumber) throws Exception {
+        return intToRoman(number * anotherRomanNumber.number);
+    }
+
+    public RomanNumber div(RomanNumber anotherRomanNumber) throws Exception {
+        return intToRoman(number / anotherRomanNumber.number);
     }
 }

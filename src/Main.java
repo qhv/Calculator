@@ -62,10 +62,10 @@ public class Main {
     static RomanNumber simpleCalc(RomanNumber first, RomanNumber last, char operator) throws Exception {
 
         return switch (operator) {
-            case '+' -> first ;
-            case '-' -> first ;
-            case '*' -> first ;
-            case '/' -> first ;
+            case '+' -> first.add(last);
+            case '-' -> first.sub(last);
+            case '*' -> first.mul(last);
+            case '/' -> first.div(last);
             default -> throw new Exception();
         };
     }
