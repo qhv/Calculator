@@ -35,19 +35,37 @@ public class Main {
             int firstOperand = Integer.parseInt(operands[0]);
             int lastOperand = Integer.parseInt(operands[1]);
 
-            return Integer.toString(simpleCalc(firstOperand, lastOperand, operator));
+            return "" + simpleCalc(firstOperand, lastOperand, operator);
         }
 
-        return "";
+        if (RomanNumber.isRomanDigit(firstSymbol)) {
+            RomanNumber firstOperand = new RomanNumber(operands[0]);
+            RomanNumber lastOperand = new RomanNumber(operands[1]);
+
+            return "" + simpleCalc(firstOperand, lastOperand, operator);
+        }
+
+        throw new Exception();
     }
 
-    static int simpleCalc(int firstOperand,int lastOperand, char operator) throws Exception {
+    static int simpleCalc(int first, int last, char operator) throws Exception {
 
         return switch (operator) {
-            case '+' -> firstOperand + lastOperand;
-            case '-' -> firstOperand - lastOperand;
-            case '*' -> firstOperand * lastOperand;
-            case '/' -> firstOperand / lastOperand;
+            case '+' -> first + last;
+            case '-' -> first - last;
+            case '*' -> first * last;
+            case '/' -> first / last;
+            default -> throw new Exception();
+        };
+    }
+
+    static RomanNumber simpleCalc(RomanNumber first, RomanNumber last, char operator) throws Exception {
+
+        return switch (operator) {
+            case '+' -> first ;
+            case '-' -> first ;
+            case '*' -> first ;
+            case '/' -> first ;
             default -> throw new Exception();
         };
     }
