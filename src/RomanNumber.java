@@ -39,6 +39,7 @@ class RomanNumber {
             int digit = number / rank % 10;
 
             result += switch (digit) {
+                case 0 -> "";
                 case 1 -> ROMANDIGITS[i];
                 case 2 -> "" + ROMANDIGITS[i] + ROMANDIGITS[i];
                 case 3 -> "" + ROMANDIGITS[i] + ROMANDIGITS[i] + ROMANDIGITS[i];
@@ -48,7 +49,7 @@ class RomanNumber {
                 case 7 -> "" + ROMANDIGITS[i + 1] + ROMANDIGITS[i] + ROMANDIGITS[i];
                 case 8 -> "" + ROMANDIGITS[i + 1] + ROMANDIGITS[i] + ROMANDIGITS[i] + ROMANDIGITS[i];
                 case 9 -> "" + ROMANDIGITS[i] + ROMANDIGITS[i + 2];
-                default -> "";
+                default -> throw new Exception();
             };
         }
 
@@ -95,5 +96,9 @@ class RomanNumber {
 
     public RomanNumber div(RomanNumber anotherRomanNumber) throws Exception {
         return intToRoman(number / anotherRomanNumber.number);
+    }
+
+    public boolean more(RomanNumber anotherRomanNumber) {
+        return number > anotherRomanNumber.number;
     }
 }

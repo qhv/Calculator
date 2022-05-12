@@ -14,9 +14,8 @@ public class Main {
         System.out.println(result);
     }
 
-    static String operators = "-+*/";
-
     public static String calc(String input) throws Exception {
+        String operators = "-+*/";
         String[] operands = input.split("[" + operators + "]");
 
         if (operands.length != 2) {
@@ -35,12 +34,21 @@ public class Main {
             int firstOperand = Integer.parseInt(operands[0]);
             int lastOperand = Integer.parseInt(operands[1]);
 
+            if (firstOperand < 1 || firstOperand > 10 || lastOperand < 1 || lastOperand > 10) {
+                throw new Exception();
+            }
+
             return "" + simpleCalc(firstOperand, lastOperand, operator);
         }
 
         if (RomanNumber.isRomanDigit(firstSymbol)) {
             RomanNumber firstOperand = new RomanNumber(operands[0]);
             RomanNumber lastOperand = new RomanNumber(operands[1]);
+            RomanNumber romanX = new RomanNumber("X");
+
+            if (firstOperand.more(romanX) || lastOperand.more(romanX)) {
+                throw new Exception();
+            }
 
             return "" + simpleCalc(firstOperand, lastOperand, operator);
         }
@@ -49,7 +57,6 @@ public class Main {
     }
 
     static int simpleCalc(int first, int last, char operator) throws Exception {
-
         return switch (operator) {
             case '+' -> first + last;
             case '-' -> first - last;
@@ -60,7 +67,6 @@ public class Main {
     }
 
     static RomanNumber simpleCalc(RomanNumber first, RomanNumber last, char operator) throws Exception {
-
         return switch (operator) {
             case '+' -> first.add(last);
             case '-' -> first.sub(last);
