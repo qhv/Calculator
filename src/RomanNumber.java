@@ -56,9 +56,9 @@ class RomanNumber {
         return new RomanNumber(result);
     }
 
-    private int convertToInt(String romanNumber) {
+    private int convertToInt(String romanNumberStr) {
         int result = 0;
-        char[] digits = romanNumber.toCharArray();
+        char[] digits = romanNumberStr.toCharArray();
 
         for (int i = 0; i < digits.length; i++) {
             boolean isNextDigit = i + 1 < digits.length;
