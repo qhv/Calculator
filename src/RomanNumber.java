@@ -2,15 +2,15 @@ import java.util.regex.Pattern;
 
 class RomanNumber {
     static final char[] ROMANDIGITS = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
-    private int number;
+    private int decimalValue;
     private String romanNumber;
 
-    public RomanNumber(String s) throws Exception {
-        if (!isCorrectRomanNumber(s)) {
+    public RomanNumber(String romanNumberStr) throws Exception {
+        if (!isCorrectRomanNumber(romanNumberStr)) {
             throw new Exception();
         }
-        number = convertToInt(s);
-        romanNumber = s;
+        decimalValue = convertToInt(romanNumberStr);
+        romanNumber = romanNumberStr;
     }
 
     static boolean isRomanDigit(char c) {
@@ -22,10 +22,10 @@ class RomanNumber {
         return false;
     }
 
-    static boolean isCorrectRomanNumber(String s) {
+    static boolean isCorrectRomanNumber(String romanNumberStr) {
         String regex = "^M{0,3}(CM|CD|D?C{0,3})?(XC|XL|L?X{0,3})?(IX|IV|V?I{0,3})?$";
 
-        return Pattern.matches(regex, s);
+        return Pattern.matches(regex, romanNumberStr);
     }
 
     static RomanNumber intToRoman(int number) throws Exception {
@@ -83,22 +83,22 @@ class RomanNumber {
     }
 
     public RomanNumber add(RomanNumber anotherRomanNumber) throws Exception {
-        return intToRoman(number + anotherRomanNumber.number);
+        return intToRoman(decimalValue + anotherRomanNumber.decimalValue);
     }
 
     public RomanNumber sub(RomanNumber anotherRomanNumber) throws Exception {
-        return intToRoman(number - anotherRomanNumber.number);
+        return intToRoman(decimalValue - anotherRomanNumber.decimalValue);
     }
 
     public RomanNumber mul(RomanNumber anotherRomanNumber) throws Exception {
-        return intToRoman(number * anotherRomanNumber.number);
+        return intToRoman(decimalValue * anotherRomanNumber.decimalValue);
     }
 
     public RomanNumber div(RomanNumber anotherRomanNumber) throws Exception {
-        return intToRoman(number / anotherRomanNumber.number);
+        return intToRoman(decimalValue / anotherRomanNumber.decimalValue);
     }
 
     public boolean more(RomanNumber anotherRomanNumber) {
-        return number > anotherRomanNumber.number;
+        return decimalValue > anotherRomanNumber.decimalValue;
     }
 }
