@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Calculator {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
     //  System.out.println("Введите выражение вида: число [операция] число.");
